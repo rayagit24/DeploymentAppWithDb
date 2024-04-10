@@ -34,6 +34,12 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+          
+      - name: Install EntityFrameworkCore Tools
+        run: |
+            dotnet new tool-manifest
+            dotnet tool install dotnet-ef
+            
       - name: Generate EF Core Migration Script
         run: dotnet ef migration script --Idempotent --no-build --configuration Release --ouput ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context DeploymentAppWithDB.Data.ProjectContext --project ${{ github.workspace }}/DeploymentAppWithDb/DeploymentAppWithDb.csproj
 
