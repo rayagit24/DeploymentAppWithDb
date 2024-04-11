@@ -38,7 +38,7 @@ jobs:
       - name: Install EntityFrameworkCore Tools
         run: |
             dotnet new tool-manifest
-            dotnet tool install dotnet-ef
+            dotnet tool install dotnet-ef --version 7.0.0
             
       - name: Generate EF Core Migration Script
         run: dotnet ef migrations script --Idempotent --no-build --configuration Release --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context DeploymentAppWithDB.Data.ProjectContext --project ${{ github.workspace }}/DeploymentAppWithDb/DeploymentAppWithDb.csproj
